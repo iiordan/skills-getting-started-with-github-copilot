@@ -83,13 +83,19 @@ section h3 {
 
 .activity-card ul li {
   margin-bottom: 5px;
-  padding: 5px 10px;
+  padding: 8px 12px; /* Slightly larger padding for better spacing */
   background-color: #e3f2fd; /* Light blue background */
-  border-radius: 4px; /* Rounded corners */
+  border-radius: 8px; /* More rounded corners */
   color: #0d47a1; /* Dark blue text */
-  font-size: 14px; /* Slightly smaller font size */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transition: transform 0.2s, background-color 0.2s; /* Smooth hover effect */
+  font-size: 15px; /* Slightly larger font size */
+  font-weight: 500; /* Medium font weight for better readability */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.activity-card ul li:hover {
+  background-color: #bbdefb; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
 .form-group {
