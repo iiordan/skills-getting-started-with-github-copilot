@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch('/activities')
     .then(response => response.json())
     .then(data => {
-      const activitiesList = document.getElementById('activities-list');
       activitiesList.innerHTML = ''; // Clear loading message
 
       Object.keys(data).forEach(activityName => {
@@ -63,7 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Max Participants:</strong> ${activity.max_participants}</p>
           <h5>Participants:</h5>
           <ul>
-            ${activity.participants.map(participant => `<li>${participant}</li>`).join('')}
+            ${activity.participants.length > 0
+              ? activity.participants.map(participant => `<li>${participant}</li>`).join('')
+              : '<li>No participants yet</li>'}
           </ul>
         `;
 
@@ -72,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(error => {
       console.error('Error fetching activities:', error);
+      activitiesList.innerHTML = '<p class="error">Failed to load activities. Please try again later.</p>';
     });
 
   // Handle form submission
@@ -115,5 +117,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initialize app
-  fetchActivities();
+  fetch();
 });
