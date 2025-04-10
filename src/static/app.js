@@ -41,6 +41,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Fetch activities from the API
+  fetch('/activities')
+    .then(response => response.json())
+    .then(data => {
+      activitiesList.innerHTML = ''; // Clear loading message
+
+      Object.keys(data).forEach(activityName => {
+        const activity = data[activityName];
+
+        // Create activity card
+        const card = document.createElement('div');
+        card.classList.add('activity-card');
+
+        // Add activity details
+        card.innerHTML = `
+          <h4>${activityName}</h4>
+          <p>${activity.description}</p>
+          <p><strong>Schedule:</strong> ${activity.schedule}</p>
+          <p><strong>Max Participants:</strong> ${activity.max_participants}</p>
+          <h5>Participants:</h5>
+          <ul>
+            ${activity.participants.length > 0
+              ? activity.participants.map(participant => `<li>${participant}</li>`).join('')
+              : '<li>No participants yet</li>'}
+          </ul>
+        `;
+
+        activitiesList.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching activities:', error);
+      activitiesList.innerHTML = '<p class="error">Failed to load activities. Please try again later.</p>';
+    });
+
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -82,5 +117,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initialize app
-  fetchActivities();
+  fetch();
 });
