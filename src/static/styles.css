@@ -83,6 +83,13 @@ section h3 {
 
 .activity-card ul li {
   margin-bottom: 5px;
+  padding: 5px 10px;
+  background-color: #e3f2fd; /* Light blue background */
+  border-radius: 4px; /* Rounded corners */
+  color: #0d47a1; /* Dark blue text */
+  font-size: 14px; /* Slightly smaller font size */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.2s, background-color 0.2s; /* Smooth hover effect */
 }
 
 .form-group {
@@ -153,3 +160,4 @@ footer {
   padding: 20px;
   color: #666;
 }
+
