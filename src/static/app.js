@@ -41,6 +41,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Fetch activities from the API
+  fetch('/activities')
+    .then(response => response.json())
+    .then(data => {
+      const activitiesList = document.getElementById('activities-list');
+      activitiesList.innerHTML = ''; // Clear loading message
+
+      Object.keys(data).forEach(activityName => {
+        const activity = data[activityName];
+
+        // Create activity card
+        const card = document.createElement('div');
+        card.classList.add('activity-card');
+
+        // Add activity details
+        card.innerHTML = `
+          <h4>${activityName}</h4>
+          <p>${activity.description}</p>
+          <p><strong>Schedule:</strong> ${activity.schedule}</p>
+          <p><strong>Max Participants:</strong> ${activity.max_participants}</p>
+          <h5>Participants:</h5>
+          <ul>
+            ${activity.participants.map(participant => `<li>${participant}</li>`).join('')}
+          </ul>
+        `;
+
+        activitiesList.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching activities:', error);
+    });
+
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
